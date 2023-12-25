@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-25T00:36:08-05:00",
+    "name": "Necesse",
+    "author": "imkringle@proton.me",
+    "description": "Build, quest, and conquer across an infinite procedurally generated world. Play alone or with friends as you establish a settlement and explore deep dungeons, fight monsters and bosses, mine rare ores, craft magical equipment, recruit specialists for your colony, and more!",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/yolks:java_11": "ghcr.io\/pterodactyl\/yolks:java_11"
+    },
+    "file_denylist": [],
+    "startup": ".\/jre\/bin\/java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar Server.jar -slots {{MAX_PLAYERS}} -localdir -world {{WORLD_NAME}} -nogui -port {{SERVER_PORT}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Type help for list of commands\"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "# SteamCMD Script Edited for HumanitZ\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n#Setting user as Anonymous by default\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\napt -y update\r\napt -y --no-install-recommends install lib32gcc-s1 ca-certificates libcurl4 curl\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \"\/mnt\/server\/steamcmd\" \"\/mnt\/server\/steamapps\"\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${SRCDS_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n# Set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Necesse Installation completed\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam AppID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1169370",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:1169370",
+            "field_type": "text"
+        },
+        {
+            "name": "World Name",
+            "description": "World to load on generation",
+            "env_variable": "WORLD_NAME",
+            "default_value": "world",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Enable or Disable Auto-Updates on Startup \/\/ Off = Disabled \/ On = Enabled",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "boolean",
+            "field_type": "text"
+        }
+    ]
+}
