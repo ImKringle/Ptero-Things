@@ -4,11 +4,8 @@ A small collection of Pterodactyl eggs I've made or tweaked to my preference
 This is no specific order, but will be updated as more get made 👀
 - **Note**: Eggs here may not be fully ready for use. Please read the README before opening any issue
 
-**Games**
+## [Games]
 -----------
-**Hogwarp**
-[Hogwarp](Hogwarp)
-**HumanitZ**
-[HumanitZ](Humanitz)
-**Smallands**
-[Smallands](Smallands)
+* [Hogwarp](Hogwarp)
+* [HumanitZ](Humanitz)
+* [Smallands](Smallands)
