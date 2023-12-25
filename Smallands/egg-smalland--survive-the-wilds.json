@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-21T16:58:43-05:00",
+    "name": "Smalland: Survive the Wilds",
+    "author": "imkringle@proton.me",
+    "description": "Smalland: Survive the Wilds is a big adventure on a tiny scale! Enjoy multiplayer survival in a vast, hazardous world. Preparation is key when you're this small, surrounded by massive creatures & at the bottom of the food chain. Craft weapons & armour, build encampments & explore a strange new land.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:ubuntu": "ghcr.io\/parkervcp\/yolks:ubuntu"
+    },
+    "file_denylist": [],
+    "startup": ".\/start-server.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \" (Engine Initialization) Total time: \"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#\r\n# Smalland Install script\r\n#\r\napt -y update\r\napt-get -y --no-install-recommends install unzip\r\ndlurl=\"https:\/\/www.dropbox.com\/scl\/fo\/npnfynj1de24gmid2b4v6\/h\/SMALLANDDedicatedServer_Linux.zip?rlkey=5yqehd802qy0hbsmvl59zdlme&dl=1\"\r\n\r\n#Download Files\r\nmkdir -p \/mnt\/server\/temp\/\r\ncd \/mnt\/server\/temp\/\r\necho \"Downloading files from Dropbox\"\r\ncurl -sSL -o SMALLANDDedicatedServer_Linux.zip $dlurl\/SMALLANDDedicatedServer_Linux.zip\r\nunzip -o SMALLANDDedicatedServer_Linux.zip\r\n\r\n#Movin\r\ncp -r \/mnt\/server\/temp\/SMALLANDDedicatedServer_Linux\/* \/mnt\/server\/\r\ncd \/mnt\/server\r\nrm -R \/mnt\/server\/temp\/\r\nchmod -R 755 *\r\n\r\necho \"---------------------\"\r\necho \"Installation Finished\"\r\necho \"---------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
