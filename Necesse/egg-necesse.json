@@ -63,8 +63,8 @@
             "description": "Enable or Disable Auto-Updates on Startup \/\/ Off = Disabled \/ On = Enabled",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
-            "user_viewable": false,
-            "user_editable": false,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "boolean",
             "field_type": "text"
         }
