@@ -1,0 +1,124 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-24T20:56:41-05:00",
+    "name": "HumanitZ",
+    "author": "imkringle@proton.me",
+    "description": "HumanitZ is a co-op, isometric, open world survival game in a world ended by the zombie outbreak. As one of the few human survivors, try to last as long as \u201chumanly\u201d possible. The past can\u2019t be changed, but you can make a difference today for the future of humanity.",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/TSSGame\/Binaries\/Linux\/TSSGameServer-Linux-Shipping TSSGame -log -port={{SERVER_PORT}} -queryport={{QUERY_PORT}}",
+    "config": {
+        "files": "{\r\n    \"TSSGame\/GameServerSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName=\": \"ServerName={{server.build.env.ServerName}}\",\r\n            \"Password=\\\"\\\"\": \"Password=\\\"{{server.build.env.PASSWORD}}\\\"\",\r\n            \"SaveName=\\\"\\\"\": \"SaveName=\\\"{{server.build.env.SAVE_NAME}}\\\"\",\r\n            \"AdminPass=\\\"\\\"\": \"AdminPass=\\\"{{server.build.env.ADMIN_PASS}}\\\"\",\r\n            \"MaxPlayers=\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"LogKaiHelper: Session created!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "# SteamCMD Script Edited for HumanitZ\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n#Setting user as Anonymous by default\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\napt -y update\r\napt -y --no-install-recommends install lib32gcc-s1 ca-certificates libcurl4 curl\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \"\/mnt\/server\/steamcmd\" \"\/mnt\/server\/steamapps\"\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} -beta linuxbranch ${SRCDS_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n# Set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## making server files executable\r\nchmod +x \/mnt\/server\/TSSGame\/Binaries\/Linux\/TSSGameServer-Linux-Shipping\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"HumanitZ Installation completed\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam App ID",
+            "description": "Steam App ID of HumanitZ Dedicated Server",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2728330",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:2728330",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Enable automatic updates on boot",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server",
+            "env_variable": "ServerName",
+            "default_value": "My HumanitZ Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "Steam Query Port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Install Flags",
+            "description": "",
+            "env_variable": "SRCDS_EXTRA_FLAGS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Save Name",
+            "description": "Name of the save you'd like to load",
+            "env_variable": "SAVE_NAME",
+            "default_value": "DedicatedSaveMP",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin Password",
+            "description": "",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "2UdxUDUpj",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required",
+            "field_type": "text"
+        }
+    ]
+}
