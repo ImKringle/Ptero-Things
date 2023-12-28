@@ -15,7 +15,7 @@
     "file_denylist": [],
     "startup": "\/home\/container\/longvinter-linux-server\/Longvinter\/Binaries\/Linux\/LongvinterServer-Linux-Shipping Longvinter -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}}",
     "config": {
-        "files": "{\r\n    \"longvinter-linux-server\/Longvinter\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName={{env.SERVER_NAME}}\",\r\n            \"ServerTag\": \"ServerTag={{env.SERVER_TAG}}\",\r\n            \"MaxPlayers\": \"MaxPlayers={{env.MAX_PLAYERS}}\",\r\n            \"ServerMOTD\": \"ServerMOTD={{env.SERVER_MOTD}}\",\r\n            \"Password\": \"Password={{env.PASSWORD}}\",\r\n            \"CommunityWebsite\": \"CommunityWebsite={{env.WEBSITE_URL}}\",\r\n            \"AdminSteamID\": \"AdminSteamID={{env.ADMIN_STEAMID}}\",\r\n            \"PVP\": \"PVP={{env.PVP}}\",\r\n            \"TentDecay\": \"TentDecay={{env.ENABLE_TENTDECAY}}\",\r\n            \"MaxTents\": \"MaxTents={{env.MAX_TENTS}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"longvinter-linux-server\/Longvinter\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName={{env.SERVER_NAME}}\",\r\n            \"ServerTag\": \"ServerTag={{env.SERVER_TAG}}\",\r\n            \"MaxPlayers\": \"MaxPlayers={{env.MAX_PLAYERS}}\",\r\n            \"ServerMOTD\": \"ServerMOTD={{env.SERVER_MOTD}}\",\r\n            \"Password\": \"Password={{env.PASSWORD}}\",\r\n            \"CommunityWebsite\": \"CommunityWebsite={{env.WEBSITE_URL}}\",\r\n            \"AdminSteamID\": \"AdminSteamID={{env.ADMIN_EOSID}}\",\r\n            \"PVP\": \"PVP={{env.PVP}}\",\r\n            \"TentDecay\": \"TentDecay={{env.ENABLE_TENTDECAY}}\",\r\n            \"MaxTents\": \"MaxTents={{env.MAX_TENTS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"CreateSession: Successfully created session\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -109,9 +109,9 @@
             "field_type": "text"
         },
         {
-            "name": "Admin SteamID",
+            "name": "Admin EOS Account ID",
             "description": "Here you can add all the admins that you want to have in the server. \/\/ \r\nIf you want to add multiple separate the ID's with single space",
-            "env_variable": "ADMIN_STEAMID",
+            "env_variable": "ADMIN_EOSID",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
