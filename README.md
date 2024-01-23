@@ -9,3 +9,6 @@ This is no specific order, but will be updated as more get made 👀
 * [HumanitZ](Humanitz)
 * [Necesse](Necesse)
 * [Longvinter](Longvinter)
+
+**Scripts**
+* [SteamCMD](Scripts/steamcmd.sh)
