@@ -13,10 +13,10 @@
         "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": "proton run .\/NoLoveLost\/Binaries\/Win64\/NoLoveLostServer-Win64-Shipping.exe -port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -servername=\"{{SERVER_NAME}}\" -log",
+    "startup": "rm \/home\/container\/NoLoveLost\/Saved\/Logs\/NoLoveLost.log; proton run .\/NoLoveLost\/Binaries\/Win64\/NoLoveLostServer-Win64-Shipping.exe -port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -servername=\"{{SERVER_NAME}}\" -log & NLL_PID=$!; tail -c0 -F \/home\/container\/NoLoveLost\/Saved\/Logs\/NoLoveLost.log --pid=$NLL_PID",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"up and running\"\r\n}",
+        "startup": "{\r\n    \"done\": \"seconds to LoadMap\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
