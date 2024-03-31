@@ -10,6 +10,7 @@ This is no specific order, but will be updated as more get made 👀
 * [Necesse](Necesse)
 * [Longvinter](Longvinter)
 * [No Love Lost](NoLoveLost)
+* [DDNet](DDNet)
 
 **Scripts**
 * [SteamCMD](Scripts/steamcmd.sh)
