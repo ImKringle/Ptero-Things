@@ -52,16 +52,6 @@
             "name": "Network Check",
             "description": "Whether to check the network configuration for any problems. Generally unneeded.",
             "env_variable": "CHECK_NETWORK",
-            "default_value": "false",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:true,false",
-            "field_type": "text"
-        },
-        {
-            "name": "Network Check",
-            "description": "Whether to check the network configuration for any problems. Generally unneeded.",
-            "env_variable": "CHECK_NETWORK",
             "default_value": "False",
             "user_viewable": true,
             "user_editable": true,
