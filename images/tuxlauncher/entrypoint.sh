@@ -79,6 +79,11 @@ for trick in $WINETRICKS_RUN; do
         winetricks -q $trick
 done
 
+if [ ! -d /mnt/server/AstroneerServer ]; then
+    echo -e "\n${GREEN}Installing the game using TuxLauncher. This may take a moment!${NC}\n"
+    python3 AstroTuxLauncher.py install
+fi
+
 # Replace Startup Variables
 MODIFIED_STARTUP=$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo ":/home/container$ ${MODIFIED_STARTUP}"
