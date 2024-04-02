@@ -52,30 +52,30 @@
             "name": "Network Check",
             "description": "Whether to check the network configuration for any problems. Generally unneeded.",
             "env_variable": "CHECK_NETWORK",
-            "default_value": "False",
+            "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:True,False",
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
             "name": "Debug Logging",
             "description": "Wether to output debug messages (Warning: Highly increased output)",
             "env_variable": "DEBUG_LOG",
-            "default_value": "False",
+            "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:True,False",
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
             "name": "Disable Encryption",
             "description": "Whether to force disable encryption for the Dedicated Server. Required as of now.",
             "env_variable": "ENCRYPTION_TOGGLE",
-            "default_value": "True",
+            "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:True,False",
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         }
     ]
