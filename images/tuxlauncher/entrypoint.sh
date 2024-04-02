@@ -79,9 +79,13 @@ for trick in $WINETRICKS_RUN; do
         winetricks -q $trick
 done
 
+#Installs Astroneer if not done already
 if [ ! -d /mnt/server/AstroneerServer ]; then
     echo -e "\n${GREEN}Installing the game using TuxLauncher. This may take a moment!${NC}\n"
+    echo -e "\n${YELLOW}Enabling Debug Logging for Download Progress. This is disabled once finished..${NC}\n"
+    sed -i 's/LogDebugMessages = .*/LogDebugMessages = true/g' launcher.toml
     python3 AstroTuxLauncher.py install
+    sed -i 's/LogDebugMessages = .*/LogDebugMessages = false/g' launcher.toml
 fi
 
 # Replace Startup Variables
@@ -90,8 +94,10 @@ echo ":/home/container$ ${MODIFIED_STARTUP}"
 
 # Run the Server
 echo -e "\n${GREEN}[STARTUP]:${NC} Starting server with the following startup command:"
-eval ${MODIFIED_STARTUP}
+echo -e "${CYAN}${modifiedStartup}${NC}\n"
+${modifiedStartup}
 
+#If an error occurs, throw exception
 if [ $? -ne 0 ]; then
     echo -e "\n${RED}PTDL_CONTAINER_ERR: There was an error while attempting to run the start command.${NC}\n"
     exit 1
