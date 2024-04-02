@@ -11,6 +11,7 @@ This is no specific order, but will be updated as more get made 👀
 * [Longvinter](Longvinter)
 * [No Love Lost](NoLoveLost)
 * [DDNet](DDNet)
+* [Astroneer | AstroTuxLauncher](astrotuxlauncher)
 
 **Scripts**
 * [SteamCMD](Scripts/steamcmd.sh)
