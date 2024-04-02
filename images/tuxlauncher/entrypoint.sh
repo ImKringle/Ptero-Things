@@ -80,21 +80,22 @@ for trick in $WINETRICKS_RUN; do
 done
 
 #Installs Astroneer if not done already
-if [ ! -d /mnt/server/AstroneerServer ]; then
-    echo -e "\n${GREEN}Installing the game using TuxLauncher. This may take a moment!${NC}\n"
-    echo -e "\n${YELLOW}Enabling Debug Logging for Download Progress. This is disabled once finished..${NC}\n"
+if [ ! -f /home/container/AstroneerServer/AstroServer.exe ]; then
+    echo -e "\t${GREEN}Installing the game using TuxLauncher. This may take a moment!${NC}\n"
+    echo -e "\t${YELLOW}Enabling Debug Logging for Download Progress. This is disabled once finished..${NC}\n"
     #Enables DebugLogging to show Download Progress via -l
     python3 AstroTuxLauncher.py -l install
+else
+    echo "Astroneer installed! Skipping\n"
 fi
 
 # Replace Startup Variables
 MODIFIED_STARTUP=$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo ":/home/container$ ${MODIFIED_STARTUP}"
 
-# Run the Server
-echo -e "\n${GREEN}[STARTUP]:${NC} Starting server with the following startup command:"
-echo -e "${CYAN}${modifiedStartup}${NC}\n"
-${modifiedStartup}
+# Start the Server
+echo -e "\t${GREEN}[STARTUP]:${NC} Starting server with the following startup command:"
+eval ${MODIFIED_STARTUP}
 
 #If an error occurs, throw exception
 if [ $? -ne 0 ]; then
