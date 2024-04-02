@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-01T23:40:54-04:00",
+    "name": "Astroneer",
+    "author": "imkringle@proton.me",
+    "description": "A game of aerospace industry and interplanetary exploration. Supports Encryption! - Running on AstroTuxLauncher",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/imkringle\/tuxlauncher:latest": "ghcr.io\/imkringle\/tuxlauncher:latest"
+    },
+    "file_denylist": [],
+    "startup": "python3 AstroTuxLauncher.py start",
+    "config": {
+        "files": "{\r\n    \"launcher.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"AutoUpdateServer\": \"AutoUpdateServer = {{server.build.env.GAME_UPDATE}}\",\r\n            \"CheckNetwork\": \"CheckNetwork = {{server.build.env.CHECK_NETWORK}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#AstroTuxLauncher Install Script\r\n#Made for Astroneer\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## Pull TuxLauncher Repoo\r\nGIT_ADDRESS=\"https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher.git\"\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    fi\r\nfi\r\n\r\n#Moving Files\r\nmv \/mnt\/server\/AstroTuxLauncher\/* \/mnt\/server\/\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"AstroTuxLauncher Install completed...    \"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Auto Update TuxLauncher",
+            "description": "",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update Astroneer",
+            "description": "",
+            "env_variable": "GAME_UPDATE",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Network Check",
+            "description": "Whether to check the network configuration for any problems. Generally unneeded.",
+            "env_variable": "CHECK_NETWORK",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        }
+    ]
+}
