@@ -83,17 +83,8 @@ done
 if [ ! -d /mnt/server/AstroneerServer ]; then
     echo -e "\n${GREEN}Installing the game using TuxLauncher. This may take a moment!${NC}\n"
     echo -e "\n${YELLOW}Enabling Debug Logging for Download Progress. This is disabled once finished..${NC}\n"
-    #Enables DebugLogging to show Download Progress
-    sed -i 's/LogDebugMessages = .*/LogDebugMessages = true/g' launcher.toml
-    python3 AstroTuxLauncher.py install &
-    # Get PID of the last background process (python3 AstroTuxLauncher.py install)
-    PID=$!
-    # Check if the process is still running
-    while ps -p $PID > /dev/null; do
-        sleep 1
-    done
-    # Once the process exits, change LogDebugMessages back to false
-    sed -i 's/LogDebugMessages = .*/LogDebugMessages = false/g' launcher.toml
+    #Enables DebugLogging to show Download Progress via -l
+    python3 AstroTuxLauncher.py -l install
 fi
 
 # Replace Startup Variables
