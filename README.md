@@ -9,12 +9,12 @@ This is no specific order, but will be updated as more get made 👀
 
 If reading this you may not know how to install an Egg, follow these steps!
 1. Download any of the json files located in the folders below.
--> It's easiest to right click the raw button and save as.
-2. In your panel go to the Nests section in the admin part of the panel
-3. Click the green Import Egg button
-4. Browse to the json file you saved earlier
-5. Select what nest you want to put the egg in.
-*Note:If you want a new nest you need to create it before importing the egg.*
+* It's easiest to right click the raw button and save as.
+3. In your panel go to the Nests section in the admin part of the panel
+4. Click the green Import Egg button
+5. Browse to the json file you saved earlier
+6. Select what nest you want to put the egg in.
+* *Note:If you want a new nest you need to create it before importing the egg.*
 
 
 **Games**
