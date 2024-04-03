@@ -4,6 +4,8 @@
 **Note: This software only allows a specific version to connect via both Java and Bedrock, also the Bedrock server must be running PocketMineMP. It is not intended for use with Vanilla Bedrock**
 **See: https://github.com/DavyCraft648/Barrel**
 
+### This Server JAR is VERY Experimental! Once fully built this will change to pull from https://github.com/BarrelMC/Barrel. Do not expect this to work well if you use it!
+
 
 ## Server Port
 | Port              | default |
