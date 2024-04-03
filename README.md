@@ -18,17 +18,17 @@ If reading this you may not know how to install an Egg, follow these steps!
 
 
 **Games**
-* [Astroneer | AstroTuxLauncher](/Games Eggs/astrotuxlauncher)
-* [DDNet](/Games Eggs/SteamCMD-Games/DDNet)
-* [Hogwarp](/Games Eggs/Hogwarp)
-* [HumanitZ](/Games Eggs/SteamCMD-Games/Humanitz)
-* [Longvinter](/Games Eggs/Longvinter)
-* [Necesse](/Games Eggs/SteamCMD-Games/Necesse)
-* [No Love Lost](/Games Eggs/SteamCMD-Games/NoLoveLost)
+* [Astroneer | AstroTuxLauncher](/Games-Eggs/astrotuxlauncher)
+* [DDNet](/Games-Eggs/SteamCMD-Games/DDNet)
+* [Hogwarp](/Games-Eggs/Hogwarp)
+* [HumanitZ](/Games-Eggs/SteamCMD-Games/Humanitz)
+* [Longvinter](/Games-Eggs/Longvinter)
+* [Necesse](/Games-Eggs/SteamCMD-Games/Necesse)
+* [No Love Lost](/Games-Eggs/SteamCMD-Games/NoLoveLost)
 
 **Scripts**
 * [SteamCMD Install](Scripts/steamcmd.sh)
 
 **Images**
-* [`AstroTuxLauncher`](/Docker Images/tuxlauncher)
+* [`AstroTuxLauncher`](/Docker-Images/tuxlauncher)
     * `ghcr.io/imkringle/tuxlauncher:latest`
