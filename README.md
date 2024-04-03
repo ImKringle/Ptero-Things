@@ -18,17 +18,17 @@ Note:If you want a new nest you need to create it before importing the egg.
 </p>
 
 **Games**
-* [Astroneer | AstroTuxLauncher](/Games/astrotuxlauncher)
-* [DDNet](/Games/SteamCMD-Games/DDNet)
-* [Hogwarp](/Games/Hogwarp)
-* [HumanitZ](/Games/SteamCMD-Games/Humanitz)
-* [Longvinter](/Games/Longvinter)
-* [Necesse](/Games/SteamCMD-Games/Necesse)
-* [No Love Lost](/Games/SteamCMD-Games/NoLoveLost)
+* [Astroneer | AstroTuxLauncher](/Games Eggs/astrotuxlauncher)
+* [DDNet](/Games Eggs/SteamCMD-Games/DDNet)
+* [Hogwarp](/Games Eggs/Hogwarp)
+* [HumanitZ](/Games Eggs/SteamCMD-Games/Humanitz)
+* [Longvinter](/Games Eggs/Longvinter)
+* [Necesse](/Games Eggs/SteamCMD-Games/Necesse)
+* [No Love Lost](/Games Eggs/SteamCMD-Games/NoLoveLost)
 
 **Scripts**
 * [SteamCMD Install](Scripts/steamcmd.sh)
 
 **Images**
-* [`AstroTuxLauncher`](/Docker_Images/tuxlauncher)
+* [`AstroTuxLauncher`](/Docker Images/tuxlauncher)
     * `ghcr.io/imkringle/tuxlauncher:latest`
