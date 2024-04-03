@@ -18,7 +18,7 @@ If reading this you may not know how to install an Egg, follow these steps!
 
 
 **Games**
-* [Astroneer | AstroTuxLauncher](/Games-Eggs/astrotuxlauncher)
+* [Astroneer | AstroTuxLauncher](/Games-Eggs/SteamCMD-Games/astrotuxlauncher)
 * [DDNet](/Games-Eggs/SteamCMD-Games/DDNet)
 * [Hogwarp](/Games-Eggs/Hogwarp)
 * [HumanitZ](/Games-Eggs/SteamCMD-Games/Humanitz)
