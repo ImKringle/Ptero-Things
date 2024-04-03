@@ -14,7 +14,7 @@ If reading this you may not know how to install an Egg, follow these steps!
 3. Click the green Import Egg button
 4. Browse to the json file you saved earlier
 5. Select what nest you want to put the egg in.
--> *Note:If you want a new nest you need to create it before importing the egg.* <-
+Note:If you want a new nest you need to create it before importing the egg.
 </p>
 
 **Games**
