@@ -29,9 +29,9 @@ If reading this you may not know how to install an Egg, follow these steps!
    * [Proxies](Games-Eggs/Minecraft-Eggs/Proxies)
       * [Barrel](Games-Eggs/Minecraft-Eggs/Proxies/Barrel)
 
-## Scripts
+## [Scripts](Scripts)
 * [SteamCMD Install](Scripts/steamcmd.sh)
 
-## Images
+## [Images](Docker-Images)
 * [`AstroTuxLauncher`](/Docker-Images/tuxlauncher)
     * `ghcr.io/imkringle/tuxlauncher:latest`
