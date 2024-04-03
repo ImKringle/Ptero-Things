@@ -1,22 +1,34 @@
 # Ptero-Things
-A collection of Pterodactyl eggs and scripts; some made by me others found on the interwebs
+A collection of things for Pterodactyl. Images, Eggs, Install scripts etc as I use them
+
+Some made by me, others are off the interwebs
 
 This is no specific order, but will be updated as more get made 👀
 - **Note**: Eggs here may not be fully ready for use. Please read the README before opening any issue
 
+<p align="center">
+If reading this you may not know how to install an Egg, follow these steps!
+1. Download any of the json files located in the folders below.
+-> It's easiest to right click the raw button and save as.
+2. In your panel go to the Nests section in the admin part of the panel
+3. Click the green Import Egg button
+4. Browse to the json file you saved earlier
+5. Select what nest you want to put the egg in.
+-> *Note:If you want a new nest you need to create it before importing the egg.* <-
+</p>
+
 **Games**
-* [Hogwarp](Hogwarp)
-* [HumanitZ](Humanitz)
-* [Necesse](Necesse)
-* [Longvinter](Longvinter)
-* [No Love Lost](NoLoveLost)
-* [DDNet](DDNet)
-* [Astroneer | AstroTuxLauncher](astrotuxlauncher)
+* [Astroneer | AstroTuxLauncher](/Games/astrotuxlauncher)
+* [DDNet](/Games/SteamCMD-Games/DDNet)
+* [Hogwarp](/Games/Hogwarp)
+* [HumanitZ](/Games/SteamCMD-Games/Humanitz)
+* [Longvinter](/Games/Longvinter)
+* [Necesse](/Games/SteamCMD-Games/Necesse)
+* [No Love Lost](/Games/SteamCMD-Games/NoLoveLost)
 
 **Scripts**
-* [SteamCMD](Scripts/steamcmd.sh)
-
+* [SteamCMD Install](Scripts/steamcmd.sh)
 
 **Images**
-* [`AstroTuxLauncher`](/images/tuxlauncher)
+* [`AstroTuxLauncher`](/Docker_Images/tuxlauncher)
     * `ghcr.io/imkringle/tuxlauncher:latest`
