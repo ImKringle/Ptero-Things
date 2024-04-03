@@ -1,0 +1,82 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-03T12:57:25-04:00",
+    "name": "Barrel Proxy",
+    "author": "imkringle@proton.me",
+    "description": "A proxy to connect to Minecraft: Bedrock Edition servers from Minecraft: Java Edition - (Geyser reverse)\r\nSee: https:\/\/github.com\/DavyCraft648\/Barrel",
+    "features": null,
+    "docker_images": {
+        "Java 11": "ghcr.io\/parkervcp\/yolks:java_11"
+    },
+    "file_denylist": [],
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar Barrel.jar",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"bindAddress\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\",\r\n            \"bedrockAddress\": \"{{server.build.env.BEDROCK_IP}}\",\r\n            \"bedrockPort\": \"{{server.build.env.BEDROCK_PORT}}\",\r\n            \"auth\": \"{{server.build.env.XBOX_AUTH}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"BarrelProxy is running on \"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#Installation Script for Barrel\r\n#A Geyser Proxy but in Reverse\r\n\r\napt update\r\napt install -y default-jdk maven git \r\n\r\n#Directory Setup\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Function to clone repository, build, and move JAR file\r\nbuild_and_move_jar() {\r\n    git clone https:\/\/github.com\/DavyCraft648\/Barrel\r\n    cd Barrel\r\n    mvn install\r\n    mv target\/*.jar \/mnt\/server\/ || { echo \"JAR Move failed\"; exit 1; }\r\n    cd \/mnt\/server\r\n    mv Barrel-*.jar Barrel.jar || { echo \"JAR Rename failed\"; exit 1; }\r\n}\r\n\r\n# Creating or updating the JAR File\r\nif [ ! -f \/mnt\/server\/Barrel.jar ]; then\r\n    build_and_move_jar\r\nelif [ \"$AUTO_UPDATE\" == \"1\" ]; then\r\n    # If AUTO_UPDATE is enabled, remove Barrel.jar and original-Barrel-1.0.0-SNAPSHOT.jar then run build_and_move_jar\r\n    rm -f \"Barrel.jar\" \"original-Barrel-1.0.0-SNAPSHOT.jar\"\r\n    build_and_move_jar\r\nelse\r\n    # If Barrel.jar exists and AUTO_UPDATE is disabled, skip the update\r\n    echo \"Barrel.jar exists. Skipping installation.\"\r\nfi\r\n\r\n# Check for a config.yml, if it is missing; create it\r\nTARGET_FILE=\"config.yml\"\r\n\r\nif test -f \"$TARGET_FILE\"; then\r\n    echo \"$TARGET_FILE exists. Skipping config install\"\r\nelse\r\n    echo \"$TARGET_FILE does not exist. Installing!\"\r\n    curl -sSL -o config.yml https:\/\/pteropaste.com\/cfpdw4gdqnjy\/\r\n    echo \"$TARGET_FILE has been installed\"\r\nfi\r\n\r\n#Removes bloat files\r\nrm -rf \"Barrel\" || { echo \"Failed to remove Barrel directory\"; exit 1; }\r\n\r\necho \"--------------------------\"\r\necho \"-Proxy Installation Done!-\"\r\necho \"--------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Java Server MOTD",
+            "description": "",
+            "env_variable": "SERVER_MOTD",
+            "default_value": "A Pterodactyl Barrel Proxy",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Bedrock Server Port",
+            "description": "",
+            "env_variable": "BEDROCK_PORT",
+            "default_value": "19132",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Bedrock Server IP",
+            "description": "",
+            "env_variable": "BEDROCK_IP",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|ip",
+            "field_type": "text"
+        },
+        {
+            "name": "Xbox Authentication",
+            "description": "Require Xbox Live Login?",
+            "env_variable": "XBOX_AUTH",
+            "default_value": "online",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:offline,online",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "If enabled, it will rebuild the JAR file on Reinstall",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}
