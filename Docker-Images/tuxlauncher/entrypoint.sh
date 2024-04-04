@@ -19,6 +19,14 @@ echo -e "${RED} ---------------------------------------------------------- ${NC}
 INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
 
+#If Github pull failed from Install Script, retry here
+if [ ! -f /home/container/AstroTuxLauncher.py ]; then
+    echo -e "${RED}AstroTux missing. Did install fail? Reinstalling it!"
+    git clone https://github.com/JoeJoeTV/AstroTuxLauncher.git .  || { echo -e "${RED}Download failed."; exit 1; }
+else
+    echo -e "${GREEN} AstroTux exists, proceeding with startup!"
+fi
+
 # Check if AUTO_UPDATE is not set or set to 1 to update TuxServer
 if [ -z "${AUTO_UPDATE}" ] || [ "${AUTO_UPDATE}" == "1" ]; then
     # Update the Server
