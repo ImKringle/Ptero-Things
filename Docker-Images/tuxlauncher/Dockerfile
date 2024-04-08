@@ -8,12 +8,13 @@ ENV   DEBIAN_FRONTEND noninteractive
 
 # Install required packages / Wine
 RUN dpkg --add-architecture i386 \
+    && apt update -y \
     && cd /tmp/ \
     && mkdir -pm755 /etc/apt/keyrings \
     && curl -sSL -o /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key \
     && curl -sSL -o /etc/apt/sources.list.d/winehq-jammy.sources https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources \
     && apt update -y \
-    && apt install -y --no-install-recommends numactl libntlm0 winbind xauth python3 libncurses5:i386 libncurses6:i386 libsdl2-2.0-0:i386 python3-pip jq \
+    && apt install -y --no-install-recommends numactl libntlm0 winbind xauth libncurses5:i386 libncurses6:i386 libsdl2-2.0-0:i386 software-properties-common python3 python3-pip python3.11-venv jq \
     && apt install --install-recommends --fix-missing winehq-stable cabextract wine-binfmt -y
 # Install RCON
 RUN cd /tmp/ \
