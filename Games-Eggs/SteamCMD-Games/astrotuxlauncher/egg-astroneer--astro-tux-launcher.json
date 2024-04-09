@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-01T23:40:54-04:00",
+    "exported_at": "2024-04-08T22:41:17-04:00",
     "name": "Astroneer",
     "author": "imkringle@proton.me",
     "description": "A game of aerospace industry and interplanetary exploration. - Based on https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher",
@@ -15,14 +15,14 @@
     "file_denylist": [],
     "startup": "python3 AstroTuxLauncher.py start",
     "config": {
-        "files": "{\r\n    \"launcher.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"AutoUpdateServer\": \"AutoUpdateServer = {{server.build.env.GAME_UPDATE}}\",\r\n            \"CheckNetwork\": \"CheckNetwork = {{server.build.env.CHECK_NETWORK}}\",\r\n            \"LogDebugMessages\": \"LogDebugMessages = {{server.build.env.DEBUG_LOG}}\",\r\n            \"DisableEncryption\": \"DisableEncryption = {{server.build.env.ENCRYPTION_TOGGLE}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"launcher.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"AutoUpdateServer\": \"AutoUpdateServer = {{server.build.env.GAME_UPDATE}}\",\r\n            \"CheckNetwork\": \"CheckNetwork = {{server.build.env.CHECK_NETWORK}}\",\r\n            \"LogDebugMessages\": \"LogDebugMessages = {{server.build.env.DEBUG_LOG}}\",\r\n            \"DisableEncryption\": \"DisableEncryption = {{server.build.env.ENCRYPTION_TOGGLE}}\"\r\n        }\r\n    },\r\n    \"AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\/AstroServerSettings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/Astro.AstroServerSettings].OwnerName\": \"{{env.OWNER_NAME}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].OwnerGuid\": \"{{env.OWNER_STEAMID}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].ServerPassword\": \"{{env.SERVER_PWD}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].ServerName\": \"{{env.SERVER_NAME}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].AutoSaveGameInterval\": \"{{env.AUTO_SAVE}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started!\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#AstroTuxLauncher Install Script\r\n#Made for Astroneer\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## Pull TuxLauncher Repoo\r\nGIT_ADDRESS=\"https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher.git\"\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    fi\r\nfi\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"AstroTuxLauncher Install completed...    \"\r\necho \"-----------------------------------------\"",
+            "script": "#AstroTuxLauncher Install Script\r\n#Made for Astroneer\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## Pull TuxLauncher Repoo\r\nGIT_ADDRESS=\"https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher.git\"\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    fi\r\nfi\r\n\r\n#Pull required configs\r\nCONFIG_DIR=\"\/mnt\/server\/AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\"\r\nASTRO_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/update-tux\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/AstroServerSettings.ini\"\r\nmkdir -p \"$CONFIG_DIR\" && cd \"$CONFIG_DIR\"\r\nif [ ! -f AstroServerSettings.ini ]; then\r\n    curl -sSL \"$ENGINE_INI\"\r\nelse\r\n    echo \"Config files already exist. Skipping download\"\r\nfi\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"AstroTuxLauncher Install completed...    \"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -76,6 +76,56 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Owner Name",
+            "description": "",
+            "env_variable": "OWNER_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "",
+            "env_variable": "SERVER_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "",
+            "env_variable": "SERVER_NAME",
+            "default_value": "An Astroneer Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Save",
+            "description": "Autosave Interval in Seconds. Recommended is 900",
+            "env_variable": "AUTO_SAVE",
+            "default_value": "900",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|in:60,300,600,900,1200",
+            "field_type": "text"
+        },
+        {
+            "name": "Owner SteamID",
+            "description": "",
+            "env_variable": "OWNER_STEAMID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|integer",
             "field_type": "text"
         }
     ]
