@@ -22,18 +22,6 @@ echo -e "${YELLOW}If you get a module missing error please ensure your egg is up
 INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
 
-#If Github pull failed from Install Script, retry here
-if [ ! -f /home/container/AstroTuxLauncher.py ]; then
-    echo -e "${RED}AstroTux missing. Did install fail? Reinstalling it!"
-    git clone https://github.com/JoeJoeTV/AstroTuxLauncher.git .  || { echo -e "${YELLOW}Download failed. Is the directory empty?"; }
-    echo -e "${RED}Clearing /home/container directory in 10 seconds. If files exist and this is in error, stop the server."
-    sleep 10
-    rm -rf *
-    git clone https://github.com/JoeJoeTV/AstroTuxLauncher.git .
-else
-    echo -e "${GREEN} AstroTux exists, proceeding with startup!"
-fi
-
 # Check if requirements.txt exists and create a VENV to read modules
 if [[ -f "/home/container/requirements.txt" ]]; then
     # Create a virtual environment in /home/container
