@@ -7,7 +7,6 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-# Information output
 echo -e "${RED} ---------------------------------------------------------- ${NC}"
 echo -e "${GREEN}Running on Debian ${GREEN} $(cat /etc/debian_version)${NC}"
 echo -e "${GREEN}Kernel Version: ${GREEN} $(uname -r)${NC}"
@@ -28,7 +27,6 @@ if [[ -f "/home/container/requirements.txt" ]]; then
     python3 -m venv /home/container --system-site-packages
     # Activate the virtual environment
     source /home/container/bin/activate
-    # Install/update requirements
     pip install -U -r /home/container/requirements.txt
 else
     # Display error if requirements.txt does not exist
@@ -37,7 +35,6 @@ fi
 
 # Check if AUTO_UPDATE is not set or set to 1 to update TuxServer
 if [ -z "${AUTO_UPDATE}" ] || [ "${AUTO_UPDATE}" == "1" ]; then
-    # Update the Server
     git config pull.rebase false
     git pull
 else
@@ -47,11 +44,10 @@ fi
 
 mkdir -p $WINEPREFIX
 
-echo -e "${YELLOW}Installation process has begun, you may see some errors in console."
-
 #Installs Astroneer if not done already
 if [ ! -f /home/container/AstroneerServer/AstroServer.exe ]; then
     echo -e "${GREEN}Installing the game using TuxLauncher. This may take a moment!${NC}"
+    echo -e "${YELLOW}Installation process has begun, you may see some errors in console.${NC}"
     echo -e "${YELLOW}Enabling Debug Logging for Download Progress. This is disabled once finished..${NC}"
     #Enables DebugLogging to show Download Progress via -l
     python3 AstroTuxLauncher.py -l install
@@ -64,7 +60,7 @@ MODIFIED_STARTUP=$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo ":/home/container$ ${MODIFIED_STARTUP}"
 
 # Start the Server
-echo -e "${GREEN}[STARTUP]:${NC} Starting server with the following startup command:"
+echo -e "${GREEN}[STARTUP]:${NC} Starting server with the following startup command: ${MODIFIED_STARTUP}"
 eval "${MODIFIED_STARTUP}"
 
 #If an error occurs, throw exception
