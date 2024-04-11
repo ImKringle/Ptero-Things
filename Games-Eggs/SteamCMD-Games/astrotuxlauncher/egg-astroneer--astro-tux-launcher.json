@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-08T22:41:17-04:00",
+    "exported_at": "2024-04-11T11:56:40-04:00",
     "name": "Astroneer",
     "author": "imkringle@proton.me",
     "description": "A game of aerospace industry and interplanetary exploration. - Based on https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher",
@@ -18,7 +18,7 @@
         "files": "{\r\n    \"launcher.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"AutoUpdateServer\": \"AutoUpdateServer = {{server.build.env.GAME_UPDATE}}\",\r\n            \"CheckNetwork\": \"CheckNetwork = {{server.build.env.CHECK_NETWORK}}\",\r\n            \"LogDebugMessages\": \"LogDebugMessages = {{server.build.env.DEBUG_LOG}}\",\r\n            \"DisableEncryption\": \"DisableEncryption = {{server.build.env.ENCRYPTION_TOGGLE}}\"\r\n        }\r\n    },\r\n    \"AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\/AstroServerSettings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/Astro.AstroServerSettings].OwnerName\": \"{{env.OWNER_NAME}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].OwnerGuid\": \"{{env.OWNER_STEAMID}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].ServerPassword\": \"{{env.SERVER_PWD}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].ServerName\": \"{{env.SERVER_NAME}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].AutoSaveGameInterval\": \"{{env.AUTO_SAVE}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started!\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "shutdown"
     },
     "scripts": {
         "installation": {
