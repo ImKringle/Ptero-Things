@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-12T06:50:30-04:00",
+    "exported_at": "2024-04-22T04:19:51-04:00",
     "name": "Astroneer",
     "author": "imkringle@proton.me",
     "description": "A game of aerospace industry and interplanetary exploration. - Based on https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#AstroTuxLauncher Install Script\r\n#Made for Astroneer\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## Pull TuxLauncher Repoo\r\nGIT_ADDRESS=\"https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher.git\"\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    fi\r\nfi\r\n\r\n# Pull required configs\r\nCONFIG_DIR=\"\/mnt\/server\/AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\"\r\nASTRO_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/main\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/AstroServerSettings.ini\"\r\nENGINE_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/main\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/Engine.ini\"\r\nmkdir -p \"$CONFIG_DIR\" && cd \"$CONFIG_DIR\"\r\nif [ ! -f AstroServerSettings.ini ] || [ ! -f Engine.ini ]; then\r\n    curl -sSL \"$ASTRO_INI\" -o AstroServerSettings.ini && curl -sSL \"$ENGINE_INI\" -o Engine.ini\r\nelse\r\n    echo \"Config files already exist. Skipping download\"\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"AstroTuxLauncher Install completed...    \"\r\necho \"-----------------------------------------\"",
+            "script": "#AstroTuxLauncher Install Script\r\n#Made for Astroneer\r\n\r\n#This isnt needed but its funny to have, kek\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\r\nfi\r\ncd \/mnt\/server\r\n\r\n## Pull TuxLauncher Repoo\r\nGIT_ADDRESS=\"https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher.git\"\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    fi\r\nfi\r\n\r\n# Pull required configs\r\nCONFIG_DIR=\"\/mnt\/server\/AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\"\r\nASTRO_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/main\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/AstroServerSettings.ini\"\r\nENGINE_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/main\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/Engine.ini\"\r\nmkdir -p \"$CONFIG_DIR\" && cd \"$CONFIG_DIR\"\r\nif [ ! -f AstroServerSettings.ini ] || [ ! -f Engine.ini ]; then\r\n    curl -sSL \"$ASTRO_INI\" -o AstroServerSettings.ini && curl -sSL \"$ENGINE_INI\" -o Engine.ini\r\nelse\r\n    echo \"Config files already exist. Skipping download\"\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"AstroTuxLauncher Install completed...    \"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -126,6 +126,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Debug Logging - Admin",
+            "description": "Generates a file for the server to troubleshoot startup \/ download issues. Only enable if needed!",
+            "env_variable": "DEBUG",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
             "field_type": "text"
         }
     ]
