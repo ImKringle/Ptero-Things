@@ -7,6 +7,18 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
+# Define log file path and send stder and sdout to logfile - Only used if DEBUG is enabled in the admin panel / egg
+if [ "${DEBUG}" == "1" ]; then
+    echo -e "${RED}Debug logging is enabled! Check ./Astrotux.log for errors on startup..${NC}"
+    LOG_FILE="/home/container/AstroTux.log"
+    log_message() {
+        echo "$(date +'%Y-%m-%d %H:%M:%S') $1" >> "$LOG_FILE"
+        }
+    exec > >(tee -a "$LOG_FILE")
+    exec 2>&1
+    log_message "Game Logging Started."
+fi
+
 echo -e "${RED} ---------------------------------------------------------- ${NC}"
 echo -e "${GREEN}Running on Debian ${GREEN} $(cat /etc/debian_version)${NC}"
 echo -e "${GREEN}Kernel Version: ${GREEN} $(uname -r)${NC}"
@@ -62,9 +74,3 @@ echo ":/home/container$ ${MODIFIED_STARTUP}"
 # Start the Server
 echo -e "${GREEN}[STARTUP]:${NC} Starting server with the following startup command: ${MODIFIED_STARTUP}"
 eval "${MODIFIED_STARTUP}"
-
-#If an error occurs, throw exception
-if [ $? -ne 0 ]; then
-    echo -e "\n${RED}PTDL_CONTAINER_ERR: There was an error while attempting to run the start command.${NC}\n"
-    exit 1
-fi

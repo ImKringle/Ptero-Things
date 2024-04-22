@@ -15,12 +15,15 @@ RUN dpkg --add-architecture i386 \
     && curl -sSL -o /etc/apt/sources.list.d/winehq-jammy.sources https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources \
     && apt update -y \
     && apt install -y --no-install-recommends numactl libntlm0 winbind xauth libncurses5:i386 libncurses6:i386 libsdl2-2.0-0:i386 software-properties-common python3 python3-pip python3.11-venv jq \
-    && apt install --install-recommends --fix-missing winehq-stable cabextract wine-binfmt -y
+    && apt install --install-recommends --fix-missing winehq-devel cabextract wine-binfmt -y
 # Install RCON
 RUN cd /tmp/ \
     && curl -sSL https://github.com/gorcon/rcon-cli/releases/download/v0.10.3/rcon-0.10.3-amd64_linux.tar.gz > rcon.tar.gz \
     && tar xvf rcon.tar.gz \
     && mv rcon-0.10.3-amd64_linux/rcon /usr/local/bin/
+# Set up Winetricks
+RUN	wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
+    && chmod +x /usr/sbin/winetricks
 
 # Set environment variables
 ENV USER=container \
