@@ -25,9 +25,6 @@ If reading this you may not know how to install an Egg, follow these steps!
 * [HumanitZ](/Games-Eggs/SteamCMD-Games/Humanitz)
 * [Necesse](/Games-Eggs/SteamCMD-Games/Necesse)
 * [No Love Lost](/Games-Eggs/SteamCMD-Games/NoLoveLost)
-## [Minecraft Eggs](Games-Eggs/Minecraft-Eggs)
-   * [Proxies](Games-Eggs/Minecraft-Eggs/Proxies)
-      * [Barrel](Games-Eggs/Minecraft-Eggs/Proxies/Barrel)
 
 ## [Scripts](Scripts)
 * [SteamCMD Install](Scripts/steamcmd.sh)
