@@ -30,5 +30,5 @@ If reading this you may not know how to install an Egg, follow these steps!
 * [SteamCMD Install](Scripts/steamcmd.sh)
 
 ## [Images](Docker-Images)
-* [`AstroTuxLauncher`](/Docker-Images/tuxlauncher)
+* [`Astroneer - AstroTuxLauncher`](/Docker-Images/tuxlauncher)
     * `ghcr.io/imkringle/tuxlauncher:latest`
