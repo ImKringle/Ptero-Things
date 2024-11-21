@@ -112,7 +112,7 @@
             "name": "Hogwarp Version",
             "description": "What version of the Hogwarp server to install, all versions can be found in my Repo under *Versions* within Game-Eggs\/Hogwarp",
             "env_variable": "HOGWARP_VERSION",
-            "default_value": "0.6rc1",
+            "default_value": "0.7.0-rc",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
