@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-12-04T14:07:58-08:00",
+    "exported_at": "2024-12-04T22:04:21-05:00",
     "name": "Astroneer",
     "author": "imkringle@proton.me",
     "description": "A game of aerospace industry and interplanetary exploration. - Based on https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher",
@@ -13,16 +13,16 @@
         "ghcr.io\/imkringle\/tuxlauncher:latest": "ghcr.io\/imkringle\/tuxlauncher:latest"
     },
     "file_denylist": [],
-    "startup": "python3 AstroTuxLauncher.py start",
+    "startup": "\/home\/container\/AstroTuxLauncher start",
     "config": {
-        "files": "{\r\n    \"launcher.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"AutoUpdateServer\": \"AutoUpdateServer = {{server.build.env.GAME_UPDATE}}\",\r\n            \"CheckNetwork\": \"CheckNetwork = {{server.build.env.CHECK_NETWORK}}\",\r\n            \"LogDebugMessages\": \"LogDebugMessages = {{server.build.env.DEBUG_LOG}}\",\r\n            \"DisableEncryption\": \"DisableEncryption = {{server.build.env.ENCRYPTION_TOGGLE}}\"\r\n        }\r\n    },\r\n    \"AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\/AstroServerSettings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/Astro.AstroServerSettings].OwnerName\": \"{{env.OWNER_NAME}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].OwnerGuid\": \"{{env.OWNER_STEAMID}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].ServerPassword\": \"{{env.SERVER_PASS}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].ServerName\": \"{{env.SERVER_NAME}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].AutoSaveGameInterval\": \"{{env.AUTO_SAVE}}\"\r\n        }\r\n    },\r\n    \"AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\/Engine.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Port\": \"Port={{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"launcher.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"AutoUpdateServer\": \"AutoUpdateServer = {{server.build.env.GAME_UPDATE}}\",\r\n            \"CheckNetwork\": \"CheckNetwork = {{server.build.env.CHECK_NETWORK}}\",\r\n            \"LogDebugMessages\": \"LogDebugMessages = {{server.build.env.DEBUG_LOG}}\",\r\n            \"DisableEncryption\": \"DisableEncryption = {{server.build.env.ENCRYPTION_TOGGLE}}\"\r\n        }\r\n    },\r\n    \"AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\/AstroServerSettings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/Astro.AstroServerSettings].OwnerName\": \"{{env.OWNER_NAME}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].OwnerGuid\": \"{{env.OWNER_ID}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].ServerPassword\": \"{{env.SERVER_PASS}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].ServerName\": \"{{env.SERVER_NAME}}\",\r\n            \"[\/Script\/Astro.AstroServerSettings].AutoSaveGameInterval\": \"{{env.AUTO_SAVE}}\"\r\n        }\r\n    },\r\n    \"AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\/Engine.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Port\": \"Port={{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started!\"\r\n}",
         "logs": "{}",
         "stop": "shutdown"
     },
     "scripts": {
         "installation": {
-            "script": "#AstroTuxLauncher Install Script\r\n#Made for Astroneer\r\n\r\n#This isnt needed but its funny to have, kek\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\r\nfi\r\ncd \/mnt\/server\r\n\r\n## Pull TuxLauncher Repoo\r\nGIT_ADDRESS=\"https:\/\/github.com\/JoeJoeTV\/AstroTuxLauncher.git\"\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    fi\r\nfi\r\n\r\n# Pull required configs\r\nCONFIG_DIR=\"\/mnt\/server\/AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\"\r\nASTRO_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/main\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/AstroServerSettings.ini\"\r\nENGINE_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/main\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/Engine.ini\"\r\nmkdir -p \"$CONFIG_DIR\" && cd \"$CONFIG_DIR\"\r\nif [ ! -f AstroServerSettings.ini ] || [ ! -f Engine.ini ]; then\r\n    curl -sSL \"$ASTRO_INI\" -o AstroServerSettings.ini && curl -sSL \"$ENGINE_INI\" -o Engine.ini\r\nelse\r\n    echo \"Config files already exist. Skipping download\"\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"AstroTuxLauncher Install completed...    \"\r\necho \"-----------------------------------------\"",
+            "script": "# AstroTuxLauncher Install Script\r\n# Made for Astroneer\r\n\r\n#This isnt needed but its funny to have, kek\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\r\nfi\r\ncd \/mnt\/server\r\n\r\n## Pull TuxLauncher Repoo\r\nGIT_API=$(curl --silent \"https:\/\/api.github.com\/repos\/JoeJoeTV\/AstroTuxLauncher\/releases\/latest\")\r\nDOWNLOAD_URL=$(echo ${GIT_API} | jq .assets | jq -r .[].browser_download_url | grep -i \"AstroTuxLauncher\")\r\nVERSION=$(echo ${DOWNLOAD_URL} | grep -oP '(?<=\/download\/)[^\/]+')\r\n\r\n# Read stored version or set to empty if file doesn't exist\r\nif [ -f \"\/mnt\/server\/AstroTuxVersion\" ]; then\r\n    STORED_VERSION=$(cat \"\/mnt\/server\/AstroTuxVersion\")\r\nelse\r\n    STORED_VERSION=\"\"\r\nfi\r\n\r\n# Compare versions and update if necessary\r\nif [ \"${VERSION}\" != \"${STORED_VERSION}\" ]; then\r\n    echo \"[INSTALLER]: Current version ${STORED_VERSION} is outdated. Updating to ${VERSION}\"\r\n    echo \"${VERSION}\" > \/mnt\/server\/AstroTuxVersion\r\n    echo \"[INSTALLER]: Downloading the latest version of TuxLauncher. This may take a moment!\"\r\n    curl -SL \"${DOWNLOAD_URL}\" -o \/mnt\/server\/AstroTuxLauncher\r\n    chmod +x \/mnt\/server\/AstroTuxLauncher\r\nelse\r\n    echo \"[INSTALLER]: TuxLauncher is already up to date. Version: ${VERSION}\"\r\nfi\r\n\r\n# Pull required configs\r\nCONFIG_DIR=\"\/mnt\/server\/AstroneerServer\/Astro\/Saved\/Config\/WindowsServer\"\r\nASTRO_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/main\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/AstroServerSettings.ini\"\r\nENGINE_INI=\"https:\/\/raw.githubusercontent.com\/ImKringle\/Ptero-Things\/main\/Games-Eggs\/SteamCMD-Games\/astrotuxlauncher\/Engine.ini\"\r\nmkdir -p \"$CONFIG_DIR\" && cd \"$CONFIG_DIR\"\r\nif [ ! -f AstroServerSettings.ini ] || [ ! -f Engine.ini ]; then\r\n    curl -sSL \"$ASTRO_INI\" -o AstroServerSettings.ini && curl -sSL \"$ENGINE_INI\" -o Engine.ini\r\nelse\r\n    echo \"[INSTALLER]: Config files already exist. Skipping download\"\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"AstroTuxLauncher Install completed...    \"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -119,13 +119,13 @@
             "field_type": "text"
         },
         {
-            "name": "Owner SteamID",
-            "description": "",
+            "name": "Owner Astroneer ID",
+            "description": "The ID of the owner for the server. NOTE: This is not a SteamID, this is a ID specific to Astroneer!",
             "env_variable": "OWNER_STEAMID",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|integer",
+            "rules": "nullable|string",
             "field_type": "text"
         },
         {
