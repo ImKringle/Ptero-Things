@@ -5,7 +5,7 @@ This Mod requires a API key only obtainable through their Discord, see the Start
 - Some features of the mod (Public servers / higher player counts) require a Patreon level. See their Patreon here: https://www.patreon.com/tiltedphoques
 
 # Updating Info
-As [Hogwarps] Linux build is solely in a Docker image, updates to the version on my end may be slow ~ though you can ping me on Discord in the Hogwarp server to rebuild it
+As [Hogwarps] Linux build is solely in a Docker image, updates to the version on my end may be slow ~ though you can ping me on Discord in the Hogwarp server to rebuild it manually. Image is rebuilt once a week automatically.
 
 ## Server Port
 | Port    | default |
