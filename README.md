@@ -32,3 +32,5 @@ If reading this you may not know how to install an Egg, follow these steps!
 ## [Images](Docker-Images)
 * [`Astroneer - AstroTuxLauncher`](/Docker-Images/tuxlauncher)
     * `ghcr.io/imkringle/tuxlauncher:latest`
+* [`Hogwarp - Linux Build`](/Docker-Images/Hogwarp)
+    * `ghcr.io/imkringle/hogwarp:release`  
