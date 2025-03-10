@@ -1,0 +1,13 @@
+{
+    "ApiKey": "",
+    "Description": "A Pterodactyl Server",
+    "Developer": false,
+    "IconUrl": "",
+    "MaxPlayer": 4,
+    "Name": "Ptero Hogwarp Server",
+    "Password": "",
+    "Port": 11778,
+    "Public": false,
+    "Tags": "",
+    "TickRate": 30
+}
