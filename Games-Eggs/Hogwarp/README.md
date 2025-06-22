@@ -6,7 +6,7 @@ This Mod requires a API key only obtainable through their Discord, see the Start
 
 # Updating Info
 As [Hogwarp]s Linux build is solely in a Docker image, updates to the version on my end may be slow. Though you can ping me on Discord in the Hogwarp server to rebuild it manually (via @ImKringle)
-> *Image is rebuilt once a week automatically.*
+> *Image is rebuilt once a month (first Monday) automatically.*
 
 ## More Info:
 See their Docs [here](https://docs.hogwarp.com/hogwarp)
