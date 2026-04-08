@@ -70,9 +70,9 @@
         },
         {
             "name": "Disable Encryption",
-            "description": "Whether to force disable encryption for the Dedicated Server. Required as of now.",
+            "description": "Whether to force disable encryption for the Dedicated Server.",
             "env_variable": "ENCRYPTION_TOGGLE",
-            "default_value": "true",
+            "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
